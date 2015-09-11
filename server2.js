@@ -11,6 +11,7 @@ var port = process.env.PORT || 8081;
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
+app.use(express.static(__dirname + '/public'));
 
 // request token
 
@@ -20,6 +21,7 @@ app.get('/', function(req, res) {
 
 app.post('/api/server2Authenticate', function(req, res) {
   console.log('Posted');
+  console.log(3333, req.body)
   axios.post('http://localhost:8080/api/authenticate', req.body).then(
       function(response) {
         if(response.data.success) {
