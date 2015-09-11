@@ -6,7 +6,7 @@ angular.module('testJWT', ['ngRoute']).config(function($routeProvider){
       controller: 'loginCtrl'
     })
     .otherwise({
-      redirectTo: '/'
+      redirectTo: '/login'
     });
 
 });

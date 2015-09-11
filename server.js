@@ -131,6 +131,7 @@ apiRoutes.get('/users', checkToken, function(req, res) {
 })
 
 apiRoutes.post('/authenticate', function(req, res) {
+  console.log(2222, req.body);
   User.findOne({
     email: req.body.email
   }, function(err, user) {

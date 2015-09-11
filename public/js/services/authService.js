@@ -6,7 +6,8 @@ angular.module('testJWT').service('authService', function($http, $q){
   function login(user){
     return $http({
       method: 'POST',
-      url: '/api/server2Authenticate'
+      url: 'http://localhost:8081/api/server2Authenticate',
+      data: user
     }).then(function(res){
       currentUser = res.data;
       return res.data;
@@ -22,7 +23,11 @@ angular.module('testJWT').service('authService', function($http, $q){
       url: 'http://localhost:8080/api/signup',
       data: user
     }).then(function(res){
-      return res.data;
+      login(user).then(function(res){
+        return res.data;
+      }, function(err){
+        return err;
+      })
     }, function(err){
       return err;
     });

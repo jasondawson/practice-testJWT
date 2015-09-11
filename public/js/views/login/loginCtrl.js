@@ -9,4 +9,13 @@ angular.module('testJWT').controller('loginCtrl', function($scope, authService){
     });
   };
 
+  $scope.login = function(){
+
+    authService.login($scope.user).then(function(res){
+      console.log(res);
+    }, function(err){
+      console.log(err);
+    });
+  };
+
 });
