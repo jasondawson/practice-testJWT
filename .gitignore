@@ -28,3 +28,6 @@ node_modules
 
 //configuration files
 config.js
+
+//Bower
+bower_components

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html ng-app="testJWT">
+<head>
+  <title>testJWT</title>
+  <link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
+</head>
+<body ng-controller="mainCtrl">
+  <div>
+    {{user}}
+  </div>
+  <ng-view></ng-view>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services/authService.js"></script>
+  <script src="views/login/loginCtr.js"></script>
+</body>
+</html>

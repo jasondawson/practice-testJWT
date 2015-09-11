@@ -11,6 +11,7 @@ var port = process.env.PORT || 8081;
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
+app.use(express.static(__dirname + '/public'));
 
 // request token
 
