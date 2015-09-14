@@ -20,7 +20,7 @@ angular.module('authJWT').service('authService', function($http, $q){
     //user has key of email, password, and role
     return $http({
       method: 'POST',
-      url: 'http://localhost:8080/api/signup',
+      url: '/api/signup',
       data: user
     }).then(function(res){
       login(user).then(function(res){

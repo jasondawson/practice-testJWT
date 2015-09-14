@@ -2,6 +2,7 @@ angular.module('clientJWT').service('authService', function($http, $q){
 
   var currentUser;
   this.login = login;
+  this.getUser = getUser;
 
   function login(user){
     return $http({
@@ -30,6 +31,17 @@ angular.module('clientJWT').service('authService', function($http, $q){
       })
     }, function(err){
       return err;
+    });
+  };
+
+  function getUser (){
+    $http({
+      method: 'GET',
+      url: '/auth'
+    }).then(function(res){
+      currentUser = res.data;
+    }, function(err){
+      console.log(err);
     });
   };
 

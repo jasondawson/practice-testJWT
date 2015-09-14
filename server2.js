@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var axios = require('axios');
 var currentUser = {};
+var config = require('./config');
 
 var port = process.env.PORT || 8081;
 
@@ -29,9 +30,16 @@ app.get('/auth', function(req, res){
       return res.json(decoded);
     });
   } else {
-    res.redirect('http://localhost:8080/api/microauth?callbackurl=auth');
+    return res.redirect('http://localhost:8080?/api/authfromserver2/callbackurl=authcallback');
   };
 });
+
+app.get('/authcallback', function(req, res){
+  jwt.verify(req.session.devMountainToken, app.get('superSecret'), function(err, decoded){
+    if(err) return res.status(500).json(err);
+    return res.json(decoded);
+  });
+})
 
 // request token
 app.get('/', function(req, res) {
@@ -75,6 +83,10 @@ app.listen(port, function() {
   console.log('Server 2 Functional on port ' + port);
 })
 
-
+// function checkCallbackUrl (req, res, next){
+//   if(req.session.checkCallbackUrl){
+//
+//   }
+// }
 
 //userid, name, roles

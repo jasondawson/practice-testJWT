@@ -9,7 +9,7 @@ var jwt = require('jsonwebtoken');
 var config = require('./config');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
+var callbackurl;
 // Mongoose models
 var User = require('./api/models/user');
 
@@ -127,12 +127,18 @@ apiRoutes.get('/', checkToken, function(req, res) {
 apiRoutes.get('/users', checkToken, function(req, res) {
   User.find({}, function(err, users) {
     res.json(users);
-  })
-})
+  });
+});
 
-apiRoutes.get('/api/microauth', function(req, res){
-
-})
+app.get('/authfromserver2', function(req, res){
+  if(req.query.callbackurl){
+    callbackurl = req.query.callbackurl;
+    req.session.callbackurl = req.query.callbackurl;
+    return res.redirect('/#/login?callbackurl' + callbackurl);
+  } else {
+    return res.status(500).send('no callbackurl');
+  };
+});
 
 apiRoutes.post('/authenticate', function(req, res) {
   console.log(2222, req.body);
@@ -157,11 +163,17 @@ apiRoutes.post('/authenticate', function(req, res) {
            user.token = token;
            user.save(function(err, user){
               req.session.devMountainToken = token;
-              res.status(200).json({
-                success: true,
-                message: 'User Authenticated.',
-                token: token
-              });
+              if(req.session.callbackurl){
+                var tempUrl = req.session.callbackurl;
+                req.session.callbackurl = '';
+                return res.redirect(tempUrl);
+              } else {
+                return res.status(200).json({
+                  success: true,
+                  message: 'User Authenticated.',
+                  token: token
+                });
+              }
            })
         }
         else {
