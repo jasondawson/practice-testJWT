@@ -8,11 +8,17 @@ var morgan = require('morgan');
 var axios = require('axios');
 var currentUser = {};
 var config = require('./config');
+var cors = require('cors');
 
 var port = process.env.PORT || 8081;
 
+var corsOptions = {
+  origin: 'http://localhost:8081'
+};
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(cors(corsOptions));
 app.use(session({
   secret: config.sessionSecret,
   saveUninitialized: true,
@@ -30,11 +36,12 @@ app.get('/auth', function(req, res){
       return res.json(decoded);
     });
   } else {
-    return res.redirect('http://localhost:8080?/api/authfromserver2/callbackurl=authcallback');
+    return res.status(500).send('log in with DevMountain');
   };
 });
 
 app.get('/authcallback', function(req, res){
+  console.log(1111, req.session);
   jwt.verify(req.session.devMountainToken, app.get('superSecret'), function(err, decoded){
     if(err) return res.status(500).json(err);
     return res.json(decoded);

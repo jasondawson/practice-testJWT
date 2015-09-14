@@ -134,7 +134,7 @@ app.get('/authfromserver2', function(req, res){
   if(req.query.callbackurl){
     callbackurl = req.query.callbackurl;
     req.session.callbackurl = req.query.callbackurl;
-    return res.redirect('/#/login?callbackurl' + callbackurl);
+    return res.redirect('/#/login?callbackurl=' + callbackurl);
   } else {
     return res.status(500).send('no callbackurl');
   };

@@ -1,15 +1,7 @@
-<div class="login">
-  <form ng-submit="login()">
-    <input type="text" ng-model="user.email" placeholder="email">
-    <input type="password" ng-model="user.password" placeholder="password">
-    <button type="submit">login</button>
-  </form>
+<div class="login" ng-hide="currentUser">
+  <a href="http://localhost:8080/authfromserver2?callbackurl=http://localhost:8081/authcallback" ng-click="login()">Login with DevMountain</a>
 </div>
 
-<div class="register">
-  <form ng-submit="register()">
-    <input type="text" ng-model="user.email" placeholder="email">
-    <input type="password" ng-model="user.password" placeholder="password">
-    <button type="submit">register</button>
-  </form>
+<div ng-show="currentUser">
+  {{currentUser}}
 </div>

@@ -1,4 +1,4 @@
-angular.module('authJWT').service('authService', function($http, $q){
+angular.module('authJWT').service('authService', function($http, $q, $routeParams, $window){
 
   var currentUser;
   this.login = login;
@@ -6,10 +6,13 @@ angular.module('authJWT').service('authService', function($http, $q){
   function login(user){
     return $http({
       method: 'POST',
-      url: 'http://localhost:8081/api/server2Authenticate',
+      url: '/api/authenticate',
       data: user
     }).then(function(res){
       currentUser = res.data;
+      if($routeParams.callbackurl){
+        $window.location.href = $routeParams.callbackurl;
+      }
       return res.data;
     }, function(err){
       return err;
