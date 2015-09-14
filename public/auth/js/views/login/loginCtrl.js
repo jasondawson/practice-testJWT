@@ -1,4 +1,4 @@
-angular.module('testJWT').controller('loginCtrl', function($scope, authService){
+angular.module('authJWT').controller('loginCtrl', function($scope, authService){
 
   $scope.register = function(){
     $scope.user.role = 'admin';

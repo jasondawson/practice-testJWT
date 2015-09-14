@@ -1,4 +1,4 @@
-angular.module('testJWT', ['ngRoute']).config(function($routeProvider){
+angular.module('clientJWT', ['ngRoute']).config(function($routeProvider){
 
   $routeProvider
     .when('/login', {

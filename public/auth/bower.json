@@ -1,0 +1,22 @@
+{
+  "name": "authJWT",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jasonalmaturner/testJWT",
+  "authors": [
+    "Jason Turner <jasonalmaturner@gmail.com>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-route": "~1.4.5",
+    "normalize-css": "normalize.css#~3.0.3"
+  }
+}

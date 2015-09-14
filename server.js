@@ -45,7 +45,7 @@ passport.deserializeUser(function(id, done) {
   })
 })
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/auth'));
 app.use(session({
   secret: config.sessionSecret,
   saveUninitialized: true,
@@ -130,6 +130,10 @@ apiRoutes.get('/users', checkToken, function(req, res) {
   })
 })
 
+apiRoutes.get('/api/microauth', function(req, res){
+
+})
+
 apiRoutes.post('/authenticate', function(req, res) {
   console.log(2222, req.body);
   User.findOne({
@@ -152,11 +156,12 @@ apiRoutes.post('/authenticate', function(req, res) {
         });
            user.token = token;
            user.save(function(err, user){
+              req.session.devMountainToken = token;
               res.status(200).json({
                 success: true,
                 message: 'User Authenticated.',
                 token: token
-                })
+              });
            })
         }
         else {

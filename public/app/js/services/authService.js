@@ -1,4 +1,4 @@
-angular.module('testJWT').service('authService', function($http, $q){
+angular.module('clientJWT').service('authService', function($http, $q){
 
   var currentUser;
   this.login = login;
