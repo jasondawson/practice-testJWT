@@ -1,0 +1,20 @@
+
+<div class="container">
+<div style="{text-align: center}">
+  <h2>Login</h2>
+</div>
+
+  <div class="container">
+    <form>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" ng-model="vm.email" id="email" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" ng-model="vm.password" id="password" placeholder="Password">
+      </div>
+      <button ng-click="vm.login()" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+</div>
