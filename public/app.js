@@ -34,6 +34,11 @@ angular
 
   function run ($rootScope, $state, $window) {
     $rootScope.$on('$stateChangeStart', function(event, toState) {
+       if ($window.localStorage.jwtoken) {
+          $rootScope.loggedIn = true;
+        } else {
+          $rootScope.loggedIn = false;
+        }
       if(toState.name === 'welcome') {
         return true;
       }

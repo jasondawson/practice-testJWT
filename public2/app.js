@@ -31,6 +31,11 @@
       $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
         //event.preventDefault();
         // console.log(toState)
+        if ($window.localStorage.jwtoken) {
+          $rootScope.loggedIn = true;
+        } else {
+          $rootScope.loggedIn = false;
+        }
 
         if(toState.name === 'welcome') {
           return true;
