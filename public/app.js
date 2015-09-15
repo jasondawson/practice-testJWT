@@ -20,23 +20,22 @@ angular
       })
       .state('content', {
         url: '/content',
-        template: '<div>Public Content! </div>'
+        template: '<div class="container"><h2>Public Content!</h2></div>'
       })
       .state('welcome', {
         url: '/',
-        template: '<div>Welcome to Terraform Mars!</div>'
+        template: '<div class="container"><h2>Welcome to Terraform Mars!</h2></div>'
       })
       .state('protectedContent', {
         url: '/protectedContent',
-        template: '<div> Login Successful </div>'
+        template: '<div class="container"><h2> Login Successful</h2></div>'
       })
   }
 
   function run ($rootScope, $state, $window) {
     $rootScope.$on('$stateChangeStart', function(event, toState) {
       if(toState.name === 'welcome') {
-        $rootScope.loggedIn = false;
-        delete $window.localStorage.jwtoken;
+        return true;
       }
       console.log(toState)
       console.log(toState.name);
@@ -45,6 +44,8 @@ angular
       if (toState.name === 'protectedContent' && !$window.localStorage.jwtoken) {
         event.preventDefault();
         $state.go('login');
+      } else if ($window.localStorage.jwtoken) {
+        $rootScope.loggedIn = true;
       }
     })
   }

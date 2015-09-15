@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" ng-controller="authCtrl as vm">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -25,11 +25,12 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a ui-sref="content">Content </span></a></li>
-        <li><a ui-sref="protectedContent">Other Content <span class="glyphicon glyphicon-lock"></span></a></li>
+        <li><a ui-sref="protectedContent">Other Content <span ng-if="!$root.loggedIn" class="glyphicon glyphicon-lock"></span></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="http://localhost:8081">Rover</a></li>
-        <li><a ui-sref="login">Login</a></li>
+        <li ng-hide="$root.loggedIn"><a ui-sref="login">Login</a></li>
+        <li ng-show="$root.loggedIn"><a href=""><div ng-click="vm.logout()">Logout</div></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -44,6 +45,8 @@
   <script src="app.js"></script>
   <script src="main/mainCtrl.js"></script>
   <script src="main/mainService.js"></script>
+  <script src="main/authCtrl.js"></script>
+
 
 </body>
 </html>

@@ -33,8 +33,6 @@
         // console.log(toState)
 
         if(toState.name === 'welcome') {
-          $rootScope.loggedIn = false;
-          delete $window.localStorage.jwtoken;
           return true;
         } else {
           // event.preventDefault();
