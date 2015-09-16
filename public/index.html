@@ -28,7 +28,7 @@
         <li><a ui-sref="protectedContent">Other Content <span ng-if="!$root.loggedIn" class="glyphicon glyphicon-lock"></span></a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="http://localhost:8081">Rover</a></li>
+        <li><a href="http://localhost:8081/redirect/">Rover</a></li>
         <li ng-hide="$root.loggedIn"><a ui-sref="login">Login</a></li>
         <li ng-show="$root.loggedIn"><a href=""><div ng-click="vm.logout()">Logout</div></a></li>
       </ul>

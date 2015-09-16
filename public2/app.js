@@ -5,8 +5,11 @@
     .config(config)
     .run(run);
 
-    function config($stateProvider, $urlRouterProvider) {
+    function config($stateProvider, $urlRouterProvider, $httpProvider) {
+
       $urlRouterProvider.otherwise('/');
+
+      $httpProvider.interceptors.push('AuthInterceptor');
 
       $stateProvider
         .state('welcome', {
@@ -25,10 +28,12 @@
           controller: 'UsersCtrl',
           controllerAs: 'vm'
         })
+
     } //end config
 
     function run($rootScope, $state, $window, loginService, $location) {
       $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+        // console.log(event);
         //event.preventDefault();
         // console.log(toState)
         if ($window.localStorage.jwtoken) {

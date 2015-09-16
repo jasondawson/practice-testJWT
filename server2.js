@@ -78,6 +78,11 @@ app.get('/api/usersThroughServer2', function(req, res){
     })
 })
 
+app.get('/redirect', function(req, res) {
+  console.log(req.session);
+  res.redirect('/#/');
+})
+
 // spin up server
 app.listen(port, function() {
   console.log('Server 2 Functional on port ' + port);
