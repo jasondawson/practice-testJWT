@@ -5,16 +5,18 @@ angular.module('clientJWT').service('authService', function($http, $q){
   this.getUser = getUser;
 
   function login(user){
-    return $http({
+    var dfd = $q.defer();
+    $http({
       method: 'GET',
       url: '/auth',
       data: user
     }).then(function(res){
       currentUser = res.data;
-      return res.data;
+      dfd.resolve(res.data);
     }, function(err){
-      return err;
+      dfd.reject(err);
     });
+    return dfd.promise;
   };
 
   function getUser (){
@@ -24,6 +26,7 @@ angular.module('clientJWT').service('authService', function($http, $q){
     }).then(function(res){
       currentUser = res.data;
     }, function(err){
+      currentUser = false;
       console.log(err);
     });
   };
@@ -35,5 +38,7 @@ angular.module('clientJWT').service('authService', function($http, $q){
   this.currentUser = function(){
     return currentUser;
   };
+
+  getUser();
 
 });

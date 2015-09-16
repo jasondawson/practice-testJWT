@@ -41,10 +41,10 @@ app.get('/auth', function(req, res){
 });
 
 app.get('/authcallback', function(req, res){
-  console.log(1111, req.session);
-  jwt.verify(req.session.devMountainToken, app.get('superSecret'), function(err, decoded){
+  jwt.verify(req.query.token, app.get('superSecret'), function(err, decoded){
     if(err) return res.status(500).json(err);
-    return res.json(decoded);
+    req.session.devMountainToken = req.query.token;
+    return res.redirect('/#');
   });
 })
 
@@ -55,8 +55,6 @@ app.get('/', function(req, res) {
 
 
 app.post('/api/server2Authenticate', function(req, res) {
-  console.log('Posted');
-  console.log(3333, req.body)
   axios.post('http://localhost:8080/api/authenticate', req.body).then(
       function(response) {
         if(response.data.success) {
@@ -64,7 +62,6 @@ app.post('/api/server2Authenticate', function(req, res) {
         } else {
           res.status(403).end()
         }
-        console.log(response);
         res.status(200).send(response.data);
   })
 }
@@ -80,7 +77,6 @@ app.get('/api/usersThroughServer2', function(req, res){
         token: currentUser.token
       }
     }).then(function(response) {
-        console.log(response);
         res.send(response.data);
     })
 })

@@ -11,7 +11,7 @@ angular.module('authJWT').service('authService', function($http, $q, $routeParam
     }).then(function(res){
       currentUser = res.data;
       if($routeParams.callbackurl){
-        $window.location.href = $routeParams.callbackurl;
+        $window.location.href = $routeParams.callbackurl + '?token=' + res.data.token;
       }
       return res.data;
     }, function(err){
