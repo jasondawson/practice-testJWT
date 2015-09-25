@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MainApp">
+<head>
+<base href="/">
+  <meta charset="UTF-8">
+  <title>Terraform Mars Main Portal</title>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<nav class="navbar navbar-default" ng-controller="authCtrl as vm">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a ui-sref="welcome" class="navbar-brand">Terraform Mars</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a ui-sref="content">Content </span></a></li>
+        <li><a ui-sref="protectedContent">Other Content <span ng-if="!$root.loggedIn" class="glyphicon glyphicon-lock"></span></a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="http://localhost:8081/redirect/">Rover</a></li>
+        <li ng-hide="$root.loggedIn"><a ui-sref="login">Login</a></li>
+        <li ng-show="$root.loggedIn"><a href=""><div ng-click="vm.logout()">Logout</div></a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<ui-view></ui-view>
+
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+  <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="/bower_components/angular/angular.js"></script>
+  <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="app.js"></script>
+  <script src="main/mainCtrl.js"></script>
+  <script src="main/mainService.js"></script>
+  <script src="main/authCtrl.js"></script>
+
+
+</body>
+</html>
