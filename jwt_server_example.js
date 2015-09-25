@@ -28,6 +28,33 @@ app.use(express.static(__dirname + '/public'));
 //authentication specific stuff starts here
 //***********************************//
 
+//middleware to check token validity
+var checkToken = function(req, res, next) {
+  var token = req.session.token
+  //decode token
+  if (token) {
+
+    //verify secret and check expiration
+    jwt.verify(token, config.jwtSecret, function(err, decoded) {
+      if (err) {
+        delete req.session.decoded;
+        return res.json({success: false, message: 'Invalid or expired token'});
+      } else {
+        //token is valid, update decoded
+        req.session.decoded = decoded;
+        next();
+      }
+    })
+  } else {
+    //no token
+    delete req.session.decoded;
+    return res.status(403).send({
+      success: false,
+      message: 'No token provided.'
+    });
+  }
+}
+
 var jwt = require('jsonwebtoken');
 // app name and client token should be given to you
 var app_name = '' // your app name here
@@ -74,6 +101,7 @@ authRoutes.get('/ms/callback', function(req, res) {
       } else {
 
         //token is valid
+        req.session.token = token;
         req.session.decoded = decoded;
 
         var tmp = req.session.redirectState || null
