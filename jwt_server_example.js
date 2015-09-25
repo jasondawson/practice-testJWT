@@ -32,7 +32,7 @@ var jwt = require('jsonwebtoken');
 // app name and client token should be given to you
 var app_name = '' // your app name here
 var client_token = '' // your client token here
-var authenticationRedirectUrl = 'http://devmounta.in/login/?bounce=' + app_name + '&token=' + client_token;
+var authenticationRedirectUrl = 'http://localhost:1337/login/?bounce=' + app_name + '&token=' + client_token;
 
 
 // authentication endpoint will look like
