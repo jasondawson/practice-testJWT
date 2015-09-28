@@ -81,12 +81,13 @@ authRoutes.get('/ms/callback', function(req, res) {
         res.redirect('/#/' + tmp);
       }
     })
-  }
+  } else {
 
   //else there is no token
   return (res.status(403).json({
     success: false,
     message: 'No token given'
+} 
   }))
 })
 
